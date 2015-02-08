@@ -274,6 +274,12 @@ func (c *Conn) SendStanza(s interface{}) error {
 	return xml.NewEncoder(c.out).Encode(s)
 }
 
+func (c *Conn) SendRaw(msg string) error {
+
+	_, err := fmt.Fprintf(c.out, msg)
+	return err
+}
+
 func (c *Conn) SetCustomStorage(space, local string, s interface{}) {
 	c.lock.Lock()
 	defer c.lock.Unlock()
